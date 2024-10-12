@@ -1,0 +1,102 @@
+<html>
+<head>
+<link rel="stylesheet" href="css/bootstrap.min.css"></link>
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}"></link>
+<title>{{data[0][0]}} Movie</title>
+</head>
+<style>
+#button{
+position:relative;
+left:45%;
+color:white;
+margin-bottom:30px;
+font-size:20px;
+font-weight:bolder;
+background-color:#000000;
+border-radius:10px;
+border:none;
+width:150px;
+height:40px;
+transition:1s;
+cursor:pointer;
+}
+#button:hover{
+background-color:#333;
+}
+</style>
+<body>
+<nav>
+<div>
+<div class="image">
+<img src="{{ url_for('static', filename='images/logo.jpg') }}"></div>
+<h1>WatchMovies</h1>
+<ul>
+<li><button onclick="location.href='/'">Home</button></li>
+<li>
+<div class="dropdown">
+<button class="dropbtn">Movies</button>
+  <div class="dropdown-content">
+    <a href="movieslist?language=Telugu">Telugu</a>
+    <a href="movieslist?language=Hindi">Hindi</a>
+    <a href="movieslist?language=English">English</a>
+  </div>
+</div>
+</li>
+<li><button>Contact</button></li>
+<li><button>About</button></li>
+</ul>
+<div class="input">
+<input type="text" class="text" id="search" placeholder="Search Movies">
+<input class="button" onclick="search()" type="button" value="search ">
+</div>
+</div>
+</nav>
+<section>
+{%
+for item in data
+%}
+<h1 style="white-space: nowrap;text-overflow: ellipsis;text-transform:capitalize;margin-left:20px;"> {{item[0]}} ({{item[8]}}) {{item[6]}} Full Movie</h1>
+<video style="margin:30px 0px 30px 60px;border:2px solid white;"width="1150" height="500" controls autoplay>
+  <source src="{{ url_for('static', filename='movies/'+item[5]) }}" type="video/mp4">
+</video>
+<h3 style="margin-left:80px;"> {{item[0]}}({{item[8]}}) Movie {{item[6]}} Movie Watch Online Download for FREE!!!</h3>
+<p style="margin-left:80px;margin-bottom:30px;padding:10px;">About:<br>
+<b>Movie name:</b>{{item[0]}}<br>
+<b>Directed by:</b>{{item[1]}}<br>
+<b>Cast:</b>{{item[2]}}<br>
+<b>genres:</b>{{item[3]}}<br>
+<b>language:</b>{{item[6]}}<br>
+<b>About:</b>{{item[7]}}<br>
+
+</p>
+<button id="button" ><a style="text-decoration:none;color:white;"href="{{ url_for('static', filename='movies/'+item[5]) }}" download="{{item[5]}}">DOWNLOAD</a></button>
+
+
+
+{%endfor%}
+</section>
+<br/>
+
+<footer>
+<div>
+<div class="footer">
+<h3 style="margin-top:30px;">WatchMovies</h3>
+<h4 style="margin:10px;">Watch all new telugu,hindi,english movies for free.Download free movies.</h4>
+<p>Contact US<p>
+</div>
+<marquee><i><b><p>watchmovies@gmail.com</p></b></i></marquee>
+</div>
+</footer>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.js"></script>
+<script>
+function search(){
+const search=document.getElementById("search").value;
+if(search!=''){
+window.location.href="/searchmovies?name="+search;
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<html>
+<head>
+<link rel="stylesheet" href="css/bootstrap.min.css"></link>
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}"></link>
+<title>Home Page | Watch Latest Movies</title>
+</head>
+<style>
+.carousel-cell { 
+  width: 30%;
+  height: 180px;
+  margin-right: 10px;
+  background:no-repeat;  
+  border-radius: 10px;
+border:1px solid black;
+  counter-increment: gallery-cell;
+  background-size:cover;
+}
+#main{
+display:flex;
+flex-direction:row;
+padding-left:10px;
+}
+.sub{
+width:20%;
+height:25vh;
+border-radius:10px;
+background:no-repeat;  
+background-size:100% 100%;
+justify-content:space-between;
+margin-right:7px;
+box-shadow:1px 1px 1px 1px;
+}
+.p{
+float:right;
+margin-top:20px;
+}
+h4{
+padding-left:5px;
+}
+</style>
+<body>
+<nav>
+<div>
+<div class="image">
+<img src="{{ url_for('static', filename='images/logo.jpg') }}"></div>
+<h1>WatchMovies</h1>
+<ul>
+<li><button onclick="location.href='/'">Home</button></li>
+<li>
+<div class="dropdown">
+<button class="dropbtn">Movies</button>
+  <div class="dropdown-content">
+    <a href="movieslist?language=Telugu">Telugu</a>
+    <a href="movieslist?language=Hindi">Hindi</a>
+    <a href="movieslist?language=English">English</a>
+  </div>
+</div>
+</li>
+<li><button>Contact</button></li>
+<li><button>About</button></li>
+</ul>
+<div class="input">
+<input type="text" class="text" id="search" placeholder="Search Movies">
+<input class="button" onclick="search()" type="button" value="search ">
+</div>
+</div>
+</nav>
+<h2 style="margin-left:20px;">Mostly Watched</h2>
+</br>
+<div class="carousel" data-flickity='{ "autoPlay": 2600 }'>
+{%
+for item in data
+%}
+ <div class="carousel-cell" style="background-size:100% 100%;background-image:url('{{ url_for('static', filename='images/'+item[0]) }}')" onclick="sn({{item[2]}})"></div>
+{%endfor %}
+</div>
+</br>
+<h2 style="margin-left:20px;">New Releases</h2>
+</br>
+<div class="carousel" data-flickity='{ "autoPlay": true }'>
+{%for item in data1%}
+  <div class="carousel-cell" style="background-size:100% 100%;background-image:url('{{ url_for('static', filename='images/'+item[0]) }}') " onclick="sn({{item[2]}})"></div>
+{%
+endfor
+%} 
+</div>
+<br/>
+<a href="/movieslist?language=Telugu" style="float:right;margin:40px 10px 25px 30px;text-decoration:none;"><p>Show More</p></a>
+<h2 style="margin:30px 10px 15px 30px;">TollyWood Movies</h2>
+<div id="main">
+
+{%
+for item in data3
+%}
+<div class="sub" style="background-image:url('{{ url_for('static', filename='images/'+item[0]) }}');cursor:pointer;" onclick="sn({{item[2]}})"></div>
+{%
+endfor
+%}
+</div>
+</br>
+<a href="/movieslist?language=Hindi" style="float:right;margin:40px 10px 15px 30px;text-decoration:none;"><p>Show More</p></a>
+<h2 style="margin:30px 10px 15px 30px;">BollyWood Movies</h2>
+<div id="main">
+{%
+for item in data2
+%}
+<div class="sub" style="background-image:url('{{ url_for('static', filename='images/'+item[0]) }}');cursor:pointer; " onclick="sn({{item[2]}})"></div>
+
+{%endfor%}
+
+</div>
+</br>
+
+<a href="/movieslist?language=English" style="float:right;margin:40px 10px 25px 30px; text-decoration:none;"><p>Show More</p></a>
+<h2 style="margin:30px 10px 15px 30px;">HollyWood Movies</h2>
+<div id="main">
+{%
+for item in data4
+%}
+<div class="sub" style="background-image:url('{{ url_for('static', filename='images/'+item[0]) }}');cursor:pointer; " onclick="sn({{item[2]}})"></div>
+{%
+endfor
+%}
+</div>
+</br>
+</br>
+<footer>
+<div>
+<div class="footer">
+<h3 style="margin-top:30px;">WatchMovies</h3>
+<h4 style="margin:10px;">Watch all new telugu,hindi,english movies for free.Download free movies.</h4>
+<p>Contact US<p>
+</div>
+<marquee><i><b><p>watchmovies@gmail.com</p></b></i></marquee>
+</div>
+</footer>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.js"></script>
+<script>
+function search(){
+const search=document.getElementById("search").value;
+if(search!=''){
+window.location.href="/searchmovies?name="+search;
+}
+}
+function sn(num){
+window.location.href="/movies?number="+num;
+}
+</script>
+</body>
+</html>

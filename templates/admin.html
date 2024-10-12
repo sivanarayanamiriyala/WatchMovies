@@ -1,0 +1,95 @@
+<html>
+<head>
+<title>Admin Page</title>
+</head>
+<style>
+*{
+margin:0px;
+padding:0px;
+}
+body{
+background-image:url('{{url_for('static',filename='images/bg1.jpg')}}');
+color:white;
+font-family:Verdana ;
+font-weight:bold;
+border:2px solid black;
+}
+input{
+margin:20px;
+border-radius:5px;
+font-size:15px;
+}
+option{
+font-size:15px;
+}
+.submit:hover{
+background-color:#333;
+}
+
+.submit{
+width:200px;
+height:45px;
+background-color:#000000;
+color:white;
+border:1px solid white;
+font-size:20px;
+font-weight:bolder;
+cursor:pointer;
+}
+</style>
+<body>
+<h1 align="center" style="font-size:50px;margin-top:40px;">Welcome {{name}}</h1>
+<form method="post" action="saveinfo"align="center" style="margin-top:40px;">
+Enter the Movie Name:
+<input type="text" name="name" required style="width:200px;height:25px;"/>
+<br/>
+Enter the Release Date:
+<input style="width:200px;height:25px;" type="date" name="year"  required/>
+<br/>
+Enter the Director Name:
+<input style="width:200px;height:25px;" type="text" name="Directedby"  required/>
+<br/>
+Enter the cast Details:
+<input  style="width:200px;height:25px;" type="text" name="cast"  required/>
+<br/>
+Enter the Movie Genre:
+<select style="width:200px;border-radius:5px; margin:20px;height:25px;"  name="genre">
+<option>select the genre</option>
+<option value="romantic">Romantic</option>
+<option value="action">Action</option>
+<option value="drama">Drama</option>
+<option value="horror">Horror</option>
+<option value="thriller">Thriller</option>
+<option value="comedy">Comedy</option>
+</select>
+<br/>
+Enter the Movies Photo Name(with extension):
+<input  style="width:200px;height:25px;" type="text" name="photoname"/>
+<br/>
+Enter the Movie File Name(with extension):
+<input style="width:200px;height:25px;"  type="text" name="filename"/>
+<br/>
+Enter the Movie's Language:
+<select  style="width:200px;margin:20px;height:25px;border-radius:5px;" name="language">
+<option>select the language</option>
+<option value="telugu">Telugu</option>
+<option value="hindi">Hindi</option>
+<option value="english">English</option>
+</select>
+<br/>
+Enter the Description About Movie:
+<textarea  style="font-size:20px;margin:20px;border-radius:5px;" name="about" rows="10" cols="40"></textarea>
+<br/>
+<br>
+<div style="color:red;font-size:20px;position:relative;">
+ {% for message in get_flashed_messages() %}
+
+{{ message }}
+ {% endfor %}
+</div>
+
+
+<input class="submit"  type="submit" value="Submit"/>
+</form>
+</body>
+</html>

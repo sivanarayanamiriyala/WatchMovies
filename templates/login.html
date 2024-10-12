@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<style>
+body{
+
+background-image:url('{{ url_for('static', filename='images/bg1.jpg') }}');
+}
+.div{
+width:400px;
+display:block;
+height:400px;
+background-color:#E1E1E1;
+position:absolute;
+top:25%;
+right:10%;
+border-radius:15px;
+font-size:15px;
+}
+.h1{
+font-size:40px;
+color:#000000;
+text-align:center;
+border-bottom:1px solid #adadad;
+padding:20px;
+}
+.div2 input{
+border:none;
+outline:none;
+background:none;
+position:absolute;
+right:12%;
+font-size:20px;
+top:33%;
+width:310px;
+height:30px; 
+border-bottom:2px solid #adadad;
+}
+.div2 label{
+position:absolute;
+left:13%;
+color:#000000;
+font-size:20px;
+top:29%;
+pointer-events:none;
+transtiton:10s;
+}
+.div2 input:focus~label{
+position absolute;
+transform:translateY(-100%);
+font-size:25px;
+color:#000000;
+
+}
+.div3 input{
+border:none;
+outline:none;
+background:none;
+font-size:20px;
+position:absolute;
+right:12%;
+top:61%;
+width:310px;
+height:30px; 
+border-bottom:2px solid #adadad;
+}
+.div3 label{
+position:absolute;
+left:13%;
+font-size:20px;
+top:56%;
+color:#000000;
+pointer-events:none;
+transtiton:10s;
+}
+.div3 input:focus~label,
+.div3 input:active~label{
+position absolute;
+transform:translateY(-100%);
+font-size:25px;
+color:#000000;
+}
+.div4{
+position:absolute;
+top:70%;
+left:10%;
+
+}
+.input1{
+position:absolute;
+top:82%;
+left:12%;
+width:310px;
+height:35px;
+font-size:17px ; 
+color:#000000;
+border-radius:10px;
+border:none;
+color:white;
+font-weight:bold;
+background-color:#000000;
+
+}
+.input1:hover{
+background-color:#333;
+}
+
+*{
+padding:0;
+margin:0;
+}
+nav{
+margin-bottom:50px;
+}
+nav div
+{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:5px;
+
+}
+nav div li{
+list-style-type:none;
+display:inline-block;
+padding:10px;
+font-size:16px;
+margin-top:-10px;
+}
+nav div h1{
+margin-top:25px;
+font-size:50px;
+color:white;
+cursor:pointer;
+}
+nav div h2{
+margin-left:-95px;
+margin-top:25px;
+}
+
+nav div .input .button{
+border:none;
+font-weight:bolder;
+background-color:#17B169;
+padding-left:5px;
+margin-top:25px;
+color:white;
+border-radius:5px;
+width:100px;
+height:50px;
+border:1px solid #252525;
+}
+nav div .input .button:hover{
+background-color:#000000;
+cursor:pointer;
+}
+
+
+nav div li button{
+	border:2px solid black;
+ padding: 16px;
+   color: white;
+background-color:#000000;
+ font-size: 18px;
+border-radius:5px;
+
+  border: 1px solid #252525;
+  font-weight:bold;
+margin-top:25px;
+
+}
+nav div li button:hover{
+background-color:#333;
+}
+
+.image{
+background-image:url('{{ url_for('static', filename='images/bg2.jpg') }}');
+
+width:50px;
+heigth:80px;
+margin-top:25px;
+margin-left:40px;
+padding:15px;
+border-radius:5px;
+}
+.image img{
+width:100%;
+border-radius:5px;
+}
+
+</style>
+<head>
+	<meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>LOGIN</title>
+</head>
+<body>
+
+<nav>
+<div>
+<div class="image">
+<img src="{{ url_for('static', filename='images/logo.jpg') }}"></div>
+<h1>WatchMovies</h1>
+<ul>
+<li><button onclick="location.href='/'">Home</button></li>
+<li><button >Contact</button></li>
+<li><button>About</button></li>
+</ul>
+<!--
+<div class="input">
+<input type="button" class="button" value="Login">
+<input class="button" type="button" value="Signup">
+</div>-->
+</div>
+</nav>
+<img  style="width:350px;top:30%;left:12%;position:absolute;opacity:90%;border-radius:20px;border:5px solid white;" src="{{ url_for('static', filename='images/logo.jpg') }}">
+<form method="post" action="admin">
+<div class="div">
+<h1 class="h1">LOG IN</h1>
+<div class="div2">
+	<input type="text" name="username"></input>
+	<label>User Name</label>
+</div>
+<div class="div3">
+	<input type="password" name="password"></input>
+	<label>PassWord<label>	
+</div>
+<div style="color:red;top:71%;left:25%;font-size:20px;position:absolute;">
+ {% for message in get_flashed_messages() %}
+
+{{ message }}
+ {% endfor %}
+</div>
+
+<input class="input1" type="submit" value="Login"> </input>
+</div>
+</form>
+</body>
+</html>
